@@ -15,10 +15,13 @@ public class Building : MonoBehaviour
 
     #region Resources
     public ResourceType Type;
-    public float AmountGenerated;
-    public float Capacity;
+    public float ResourceGeneratedPerSec;
+    public float TotalResourceCapacity;
+    public float ResourceConsumpedPerSec;
     #endregion
 
+    public float PowerConsumptionRate;
+    public float ActualPowerConsumedPerSec;
 
     // Use this for initialization
     void Start ()
@@ -27,8 +30,8 @@ public class Building : MonoBehaviour
     }
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update ()
+    {
 	}
 
     public string GetBuildingNameAsString()

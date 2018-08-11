@@ -13,7 +13,12 @@ public class LevelManager : MonoBehaviour
 
     public GameObject BuildingManagerPrefab;
     public BuildingManager BuildingManager;
+
     public CameraManager CameraManager;
+
+    public GameObject UIManagerPrefab;
+    public UIManager UIManager;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -31,6 +36,7 @@ public class LevelManager : MonoBehaviour
         InstantiateAndInitialize_Map();
         InstantiateAndInitialize_Buildings();
         InstantiateAndInitialize_Camera();
+        InstantiateAndInitialize_UI();
     }
 
     private void InstantiateAndInitialize_Map()
@@ -68,5 +74,15 @@ public class LevelManager : MonoBehaviour
         Camera.main.gameObject.AddComponent<CameraManager>();
 
         this.CameraManager = Camera.main.gameObject.GetComponent<CameraManager>();
+    }
+
+    private void InstantiateAndInitialize_UI()
+    {
+        this.UIManager = Instantiate
+            (
+                UIManagerPrefab,
+                Vector3.zero,
+                Quaternion.identity
+            ).GetComponent<UIManager>();
     }
 }

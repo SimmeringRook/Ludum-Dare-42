@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,4 +50,8 @@ public class BuildingManager : MonoBehaviour
         this.Buildings.Add(spawnedBuilding);
     }
 
+    public void SetSelectedBuildingGhost(GameObject buildingPrefab)
+    {
+        throw new NotImplementedException();
+    }
 }

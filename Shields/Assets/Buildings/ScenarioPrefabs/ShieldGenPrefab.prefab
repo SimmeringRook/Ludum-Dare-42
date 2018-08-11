@@ -52,7 +52,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4065708263009900}
-  - component: {fileID: 114397075192586192}
+  - component: {fileID: 114116893104553610}
   m_Layer: 0
   m_Name: ShieldGenPrefab
   m_TagString: Untagged
@@ -244,7 +244,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114397075192586192
+--- !u!114 &114116893104553610
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1735478421832824}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d7796bc45ca76a428f5b88a34f2eb66, type: 3}
+  m_Script: {fileID: 11500000, guid: f25aeaef2ff0c664b88c81bfe1374615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 11
@@ -260,5 +260,9 @@ MonoBehaviour:
   ConstructionTime: 0
   BuildingGraphic: {fileID: 0}
   Type: 2
-  AmountGenerated: 0
-  Capacity: 0
+  ResourceGeneratedPerSec: 0
+  TotalResourceCapacity: 0
+  ResourceConsumpedPerSec: 0
+  PowerConsumptionRate: 10
+  ActualPowerConsumedPerSec: 5
+  ShieldDome: {fileID: 0}

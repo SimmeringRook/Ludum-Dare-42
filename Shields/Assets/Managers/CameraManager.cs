@@ -93,13 +93,13 @@ public class CameraManager : MonoBehaviour
                 {
                     Vector3 axis = new Vector3
                         (
-                        x: Vector3.Lerp(lastPosition, currentMousePosition, Time.deltaTime * differenceInY).x,
-                        y: Vector3.Lerp(lastPosition, currentMousePosition, Time.deltaTime * differenceInX).y,
+                        x: 0/*Vector3.Lerp(lastPosition, currentMousePosition, Time.deltaTime * differenceInY).x*/,
+                        y: differenceInX/*Vector3.Lerp(lastPosition, currentMousePosition, Time.deltaTime * differenceInX).y*/,
                         z: 0
                         );
 
                     this.gameObject.transform.LookAt(new Vector3(5.5f, 0f, 5.5f));
-                    this.gameObject.transform.RotateAround(new Vector3(5.5f, 0f, 5.5f), axis * -1 , 100 * Time.deltaTime);
+                    this.gameObject.transform.RotateAround(new Vector3(5.5f, 0f, 5.5f), axis, 100 * Time.deltaTime);
                 }
 
             }
