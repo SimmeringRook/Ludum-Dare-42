@@ -187,6 +187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 452959636}
   - component: {fileID: 452959635}
+  - component: {fileID: 452959637}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -217,6 +218,7 @@ MonoBehaviour:
   UIManagerPrefab: {fileID: 1037832090044468, guid: d594fe603ae55504aa88795d06fec915,
     type: 2}
   UIManager: {fileID: 0}
+  MouseManager: {fileID: 0}
 --- !u!4 &452959636
 Transform:
   m_ObjectHideFlags: 0
@@ -230,6 +232,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &452959637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 452959634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7688af7ffd9fc24d8946dc7877c6c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BuildingManager: {fileID: 0}
+  InvalidLocationMaterial: {fileID: 2100000, guid: c9700a1d75aa61945a3bb5ddbc638c7c,
+    type: 2}
+  ValidLocationMaterial: {fileID: 2100000, guid: 93cda5e032908f54b86510390c540ee0,
+    type: 2}
+  GhostOfBuildingPrefab: {fileID: 0}
 --- !u!1 &951804146
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +416,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1772191596}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 20, z: -10}
+  m_LocalPosition: {x: 0, y: 20, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1564280259}

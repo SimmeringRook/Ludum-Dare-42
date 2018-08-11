@@ -23,8 +23,6 @@ public class ShieldGeneratorScript : Building
 
         this.MapRadius = Mathf.Ceil((this.Map.Width / 2f) - 1);
 
-        this.PowerConsumptionRate = 10f;
-        this.ActualPowerConsumedPerSec = 10f;
 	}
 	
 	// Update is called once per frame
@@ -35,10 +33,15 @@ public class ShieldGeneratorScript : Building
 
     void UpdateShieldRadius()
     {
-        float shieldPercent = this.ActualPowerConsumedPerSec / this.PowerConsumptionRate * 100;
+        float shieldPercent = this.GetShieldPercent();
         float shieldPercentThreshold = 100f / this.MapRadius;
         float shieldRadius = Mathf.Ceil(shieldPercent / shieldPercentThreshold) + 0.5f;
 
         this.ShieldDome.transform.localScale = new Vector3(shieldRadius, 4, shieldRadius);
+    }
+
+    public float GetShieldPercent()
+    {
+        return (this.ActualResourceConsumpedPerSec.Amount / this.ResourceConsumptionRate.Amount) * 100;
     }
 }

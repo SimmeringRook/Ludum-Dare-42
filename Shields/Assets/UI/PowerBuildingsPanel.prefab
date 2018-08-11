@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e597da102bccc4aa068fc83b54e3d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BuildingPrefab: {fileID: 0}
   UIBuildingPanels: []
 --- !u!114 &114058774697292670
 MonoBehaviour:
@@ -484,6 +485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e597da102bccc4aa068fc83b54e3d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BuildingPrefab: {fileID: 0}
   UIBuildingPanels: []
 --- !u!114 &114725799147306602
 MonoBehaviour:
@@ -575,6 +577,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e597da102bccc4aa068fc83b54e3d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BuildingPrefab: {fileID: 1992105463076516, guid: f1d0b6a5b8a60a44ca72330e8cb9d35d,
+    type: 2}
   UIBuildingPanels: []
 --- !u!114 &114952168349195034
 MonoBehaviour:

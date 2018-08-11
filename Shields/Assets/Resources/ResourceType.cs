@@ -1,7 +1,8 @@
 ﻿public enum ResourceType
 {
     Power,
-    Consumable,
+    Coal,
+    Oil,
     Shield,
     People
 }

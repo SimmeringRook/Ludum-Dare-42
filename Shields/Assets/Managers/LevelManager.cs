@@ -19,6 +19,7 @@ public class LevelManager : MonoBehaviour
     public GameObject UIManagerPrefab;
     public UIManager UIManager;
 
+    public MouseManager MouseManager;
 	// Use this for initialization
 	void Start ()
     {
@@ -36,7 +37,12 @@ public class LevelManager : MonoBehaviour
         InstantiateAndInitialize_Map();
         InstantiateAndInitialize_Buildings();
         InstantiateAndInitialize_Camera();
+
+        this.MouseManager = this.gameObject.GetComponent<MouseManager>();
+        this.MouseManager.BuildingManager = this.BuildingManager;
+
         InstantiateAndInitialize_UI();
+        
     }
 
     private void InstantiateAndInitialize_Map()
@@ -66,7 +72,7 @@ public class LevelManager : MonoBehaviour
         this.BuildingManager.gameObject.transform.SetParent(this.gameObject.transform);
         this.BuildingManager.gameObject.name = "Buildings";
 
-        this.BuildingManager.Initialize();
+        this.BuildingManager.Initialize(this);
     }
 
     private void InstantiateAndInitialize_Camera()

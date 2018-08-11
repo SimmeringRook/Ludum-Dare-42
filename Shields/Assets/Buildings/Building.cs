@@ -14,14 +14,17 @@ public class Building : MonoBehaviour
     #endregion
 
     #region Resources
-    public ResourceType Type;
-    public float ResourceGeneratedPerSec;
-    public float TotalResourceCapacity;
-    public float ResourceConsumpedPerSec;
-    #endregion
+    //Todo:: Find a way to... condense
+    public ResourceTypeToAmountMap ActualResourceGeneratedPerSec;
+    public ResourceTypeToAmountMap ResourceGeneratedPerSec;
 
-    public float PowerConsumptionRate;
-    public float ActualPowerConsumedPerSec;
+    public ResourceTypeToAmountMap CurrentResourceStorage;
+    public ResourceTypeToAmountMap TotalResourceCapacity;
+
+    public ResourceTypeToAmountMap ResourceConsumptionRate;
+    public ResourceTypeToAmountMap ActualResourceConsumpedPerSec;
+    
+    #endregion
 
     // Use this for initialization
     void Start ()
@@ -40,11 +43,49 @@ public class Building : MonoBehaviour
         return this.Name.ToString();
     }
 
-    public void PlaceBuildingAt(Vector3 location)
+    public void AttemptSatisifyDemandOnTick()
     {
-        //Ensure the building isn't clipping the ground
-        //TODO:: Change this if the world isn't flat
-        location.y = this.Dimensions.y / 2f;
-        this.BuildingGraphic.transform.position = location;
+        this.ActualResourceConsumpedPerSec.Amount = 0;
+        this.ActualResourceGeneratedPerSec.Amount = 0;
+
+        //If this building has onsite storage for the resource it consumes,
+        //attempt to consume from storage
+        if (this.ResourceConsumptionRate.Type == this.CurrentResourceStorage.Type)
+        {
+            float remainingStorage = this.CurrentResourceStorage.Amount - this.ResourceConsumptionRate.Amount;
+            float partialConsumption = this.ResourceConsumptionRate.Amount - this.CurrentResourceStorage.Amount;
+
+            //If we can actually satisfy the building's needs via storage; do so.
+            if (remainingStorage >= 0f)
+            {
+                this.CurrentResourceStorage.Amount -= this.ResourceConsumptionRate.Amount;
+                this.ActualResourceConsumpedPerSec.Amount = this.ResourceConsumptionRate.Amount;
+
+                this.ActualResourceGeneratedPerSec.Amount = this.ResourceGeneratedPerSec.Amount;
+            }
+            //Otherwise, check to see if we can partially satisfy the building
+            else if (partialConsumption < (this.ResourceConsumptionRate.Amount))
+            {
+                this.ActualResourceConsumpedPerSec.Amount = partialConsumption;
+            }
+            else
+            {
+                //There's nothing left in storage to help with the building's consumption
+                //There is nothing left to do until the BuildingManager handles transfer from
+                //sources or storages to meet demand (if possible)
+            }
+        }
     }
+}
+
+[System.Serializable]
+public class ResourceTypeToAmountMap
+{
+    public ResourceType Type;
+    public float Amount;
+    //What about:
+
+    /* public float Requested;
+     * public float Actual;
+     */
 }

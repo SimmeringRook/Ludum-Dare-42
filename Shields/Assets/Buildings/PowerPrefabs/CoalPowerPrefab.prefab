@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23809149036284902}
   m_Layer: 0
   m_Name: Graphics
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1992105463076516}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.5, y: -0.5, z: 7.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4837149411685808}
@@ -140,6 +140,21 @@ MonoBehaviour:
   Dimensions: {x: 1, y: 1, z: 1}
   ConstructionTime: 10
   BuildingGraphic: {fileID: 0}
-  Type: 0
-  AmountGenerated: 1
-  Capacity: 4
+  ActualResourceGeneratedPerSec:
+    Type: 0
+    Amount: 0
+  ResourceGeneratedPerSec:
+    Type: 0
+    Amount: 1
+  CurrentResourceStorage:
+    Type: 1
+    Amount: 0
+  TotalResourceCapacity:
+    Type: 1
+    Amount: 4
+  ResourceConsumptionRate:
+    Type: 1
+    Amount: 2
+  ActualResourceConsumpedPerSec:
+    Type: 1
+    Amount: 0

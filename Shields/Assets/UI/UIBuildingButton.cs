@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class UIBuildingButton : MonoBehaviour
 {
-    private BuildingManager BuildingManager;
+    private MouseManager MouseManager;
     public GameObject BuildingPrefab;
     public UIBuildingPanel[] UIBuildingPanels;
 
-    public void Initialize(UIBuildingPanel[] buildingPanels)
+    public void Initialize(UIBuildingPanel[] buildingPanels, MouseManager mouseManager)
     {
         UIBuildingPanels = buildingPanels;
+        this.MouseManager = mouseManager;
     }
 
 	// Use this for initialization
@@ -43,7 +44,7 @@ public class UIBuildingButton : MonoBehaviour
         else
         {
             this.HideAll();
-            GameObject.FindObjectOfType<BuildingManager>().SetSelectedBuildingGhost(this.BuildingPrefab);
+            this.MouseManager.SetSelectedBuildingGhost(this.BuildingPrefab);
         }
     }
 

@@ -259,10 +259,22 @@ MonoBehaviour:
   Dimensions: {x: 1, y: 4, z: 1}
   ConstructionTime: 0
   BuildingGraphic: {fileID: 0}
-  Type: 2
-  ResourceGeneratedPerSec: 0
-  TotalResourceCapacity: 0
-  ResourceConsumpedPerSec: 0
-  PowerConsumptionRate: 10
-  ActualPowerConsumedPerSec: 5
+  ActualResourceGeneratedPerSec:
+    Type: 0
+    Amount: 0
+  ResourceGeneratedPerSec:
+    Type: 0
+    Amount: 0
+  CurrentResourceStorage:
+    Type: 0
+    Amount: 0
+  TotalResourceCapacity:
+    Type: 0
+    Amount: 0
+  ResourceConsumptionRate:
+    Type: 0
+    Amount: 1
+  ActualResourceConsumpedPerSec:
+    Type: 0
+    Amount: 0
   ShieldDome: {fileID: 0}

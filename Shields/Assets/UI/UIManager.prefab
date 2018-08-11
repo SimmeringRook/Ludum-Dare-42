@@ -660,7 +660,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114172038804748006}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114338090932620912}
+        m_MethodName: OnButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114037249484891836
@@ -674,7 +685,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e597da102bccc4aa068fc83b54e3d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingPrefab: {fileID: 0}
+  BuildingPrefab: {fileID: 1992105463076516, guid: f1d0b6a5b8a60a44ca72330e8cb9d35d,
+    type: 2}
   UIBuildingPanels: []
 --- !u!114 &114046374311466546
 MonoBehaviour:
@@ -1221,7 +1233,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114808392439618136}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114944608078015856}
+        m_MethodName: OnButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114338090932620912
@@ -1235,7 +1258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e597da102bccc4aa068fc83b54e3d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingPrefab: {fileID: 0}
+  BuildingPrefab: {fileID: 1428153319288024, guid: ce3713483984e924f8b7383ebd51ae42,
+    type: 2}
   UIBuildingPanels: []
 --- !u!114 &114350559252756860
 MonoBehaviour:
@@ -2154,7 +2178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e597da102bccc4aa068fc83b54e3d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingPrefab: {fileID: 0}
+  BuildingPrefab: {fileID: 1864316434455104, guid: d9b21a64f158fa4488670d94ba9ec7c8,
+    type: 2}
   UIBuildingPanels: []
 --- !u!114 &114951702624092860
 MonoBehaviour:
