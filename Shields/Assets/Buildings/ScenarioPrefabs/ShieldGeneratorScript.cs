@@ -44,4 +44,32 @@ public class ShieldGeneratorScript : Building
     {
         return (this.ActualResourceConsumpedPerSec.Amount / this.ResourceConsumptionRate.Amount) * 100;
     }
+
+    private float stormLevel = 0f;
+    private float defaultShieldPowerRate = 1f;
+
+    public void UpdateStormLevel(float stormLevel)
+    {
+        this.stormLevel = stormLevel;
+        float powerRequirementModifer = 1f;
+
+        if (this.stormLevel > 8f)
+        {
+            powerRequirementModifer = 4f;
+        }
+        if (this.stormLevel > 6f)
+        {
+            powerRequirementModifer = 2f;
+        }
+        else if (this.stormLevel > 4f)
+        {
+            powerRequirementModifer = 1.5f;
+        }
+        else if (this.stormLevel > 2f)
+        {
+            powerRequirementModifer = 1.25f;
+        }
+
+        this.ResourceConsumptionRate.Amount = (this.defaultShieldPowerRate + this.stormLevel) * powerRequirementModifer;
+    }
 }

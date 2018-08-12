@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 23842130690075046}
   m_Layer: 0
   m_Name: Graphics
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,6 +139,22 @@ MonoBehaviour:
   Name: 0
   Dimensions: {x: 0, y: 0, z: 0}
   ConstructionTime: 0
-  Type: 0
-  AmountGenerated: 0
-  Capacity: 0
+  BuildingGraphic: {fileID: 0}
+  ActualResourceGeneratedPerSec:
+    Type: 0
+    Amount: 0
+  ResourceGeneratedPerSec:
+    Type: 0
+    Amount: 0
+  CurrentResourceStorage:
+    Type: 0
+    Amount: 0
+  TotalResourceCapacity:
+    Type: 0
+    Amount: 0
+  ResourceConsumptionRate:
+    Type: 0
+    Amount: 0
+  ActualResourceConsumpedPerSec:
+    Type: 0
+    Amount: 0

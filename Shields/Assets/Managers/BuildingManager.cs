@@ -34,16 +34,25 @@ public class BuildingManager : MonoBehaviour
         
 	}
 
-    float resourceTick = 1f;
+    private static float resourceTick = 5f;
+    private float tickTimer = BuildingManager.resourceTick;
+
+    private Dictionary<ResourceType, float> resourcesStored = new Dictionary<ResourceType, float>()
+    {
+        {ResourceType.Power, 0f },
+        {ResourceType.Coal, 0f},
+        {ResourceType.Oil, 6f }
+    };
 
 	// Update is called once per frame
 	void Update ()
     {
-        resourceTick -= Time.deltaTime;
-        if (resourceTick < 0)
+        this.tickTimer -= Time.deltaTime;
+        if (this.tickTimer < 0)
         {
             ResourcesSuppliedAndDemanded resourcesSuppliedAndDemanded = this.CalculateSupplyAndDemandForTick();
             this.LevelManager.UIManager.TriggerTickUpdate(resourcesSuppliedAndDemanded);
+            this.tickTimer = BuildingManager.resourceTick;
         }
 	}
 
@@ -67,11 +76,16 @@ public class BuildingManager : MonoBehaviour
         Dictionary<ResourceType, float> AvailableResourcesForTick = new Dictionary<ResourceType, float>()
         {
             {ResourceType.Power, 0f },
-            {ResourceType.Coal, 10f},
+            {ResourceType.Coal, 0f},
             {ResourceType.Oil, 0f }
         };
 
-
+        foreach (var kvp in this.resourcesStored)
+        {
+            if (kvp.Key != ResourceType.Power)
+                AvailableResourcesForTick[kvp.Key] = kvp.Value;        
+        }
+        
         //Tally everything up
         foreach (Building building in this.Buildings)
         {
@@ -91,9 +105,9 @@ public class BuildingManager : MonoBehaviour
             if (b.ActualResourceConsumpedPerSec.Amount < b.ResourceConsumptionRate.Amount)
             {
                 float differenceBetweenActualAndFull = b.ResourceConsumptionRate.Amount - b.ActualResourceConsumpedPerSec.Amount;
-                float generatedPerSecond = AvailableResourcesForTick[b.ResourceConsumptionRate.Type];
+                float availableResources = AvailableResourcesForTick[b.ResourceConsumptionRate.Type];
 
-                if (generatedPerSecond - differenceBetweenActualAndFull >= 0)
+                if (availableResources - differenceBetweenActualAndFull >= 0)
                 {
                     AvailableResourcesForTick[b.ResourceConsumptionRate.Type] -= differenceBetweenActualAndFull;
                     b.ActualResourceConsumpedPerSec.Amount = b.ResourceConsumptionRate.Amount;
@@ -101,11 +115,30 @@ public class BuildingManager : MonoBehaviour
                 }
                 else
                 {
+                    //Use remaining availble resources
+                    if (availableResources > 0)
+                    {
+                        b.ActualResourceConsumpedPerSec.Amount = availableResources;
+                    }
+
+                    AvailableResourcesForTick[b.ResourceConsumptionRate.Type] = 0;
+
                     float percentSatisfied = b.ActualResourceConsumpedPerSec.Amount / b.ResourceConsumptionRate.Amount;
                     b.ActualResourceGeneratedPerSec.Amount = b.ResourceGeneratedPerSec.Amount * percentSatisfied;
                 }
             }
         }
+
+        //TODO:: add tanks/warehouse
+
+        this.resourcesStored = AvailableResourcesForTick;
+
+        //PrintTick(new ResourcesSuppliedAndDemanded
+        //{
+        //    AvailableResourcesForTick = AvailableResourcesForTick,
+        //    ResourcesGeneratedPerSecond = ResourcesGeneratedPerSecond,
+        //    ResourcesDemandedPerSecond = ResourcesDemandedPerSecond
+        //});
 
         return new ResourcesSuppliedAndDemanded
         {
@@ -115,6 +148,29 @@ public class BuildingManager : MonoBehaviour
         };
     }
 
+    public void PrintTick(ResourcesSuppliedAndDemanded rsd)
+    {
+        Debug.Log("Resources Generated");
+        foreach (var kvp in rsd.ResourcesGeneratedPerSecond)
+        {
+            if (kvp.Key == ResourceType.Power)
+            Debug.Log(kvp.Key + ": " + kvp.Value);
+        }
+
+        Debug.Log("Resources Demanded");
+        foreach (var kvp in rsd.ResourcesDemandedPerSecond)
+        {
+            if (kvp.Key == ResourceType.Power)
+                Debug.Log(kvp.Key + ": " + kvp.Value);
+        }
+
+        Debug.Log("Resources Available");
+        foreach (var kvp in rsd.AvailableResourcesForTick)
+        {
+            if (kvp.Key == ResourceType.Power)
+                Debug.Log(kvp.Key + ": " + kvp.Value);
+        }
+    }
 
     public void SpawnBuildingAt(GameObject buildingPrefab, Vector3 location)
     {

@@ -154,7 +154,7 @@ MonoBehaviour:
     Amount: 4
   ResourceConsumptionRate:
     Type: 1
-    Amount: 2
+    Amount: 1.5
   ActualResourceConsumpedPerSec:
     Type: 1
     Amount: 0

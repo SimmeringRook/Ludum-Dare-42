@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
 
     
     private Text[] PowerStatusTextboxes;
+    private Text[] ResourceStatusTextboxes;
 
     private Text ShieldStatusTextbox;
     private ShieldGeneratorScript shieldGenerator;
@@ -27,6 +28,7 @@ public class UIManager : MonoBehaviour
 
         this.ShieldStatusTextbox = this.UIPanels[0].gameObject.GetComponentInChildren<Text>();
         this.PowerStatusTextboxes = this.UIPanels[1].gameObject.GetComponentsInChildren<Text>();
+        this.ResourceStatusTextboxes = this.UIPanels[2].gameObject.GetComponentsInChildren<Text>();
 
         UIBuildingPanel[] uiBuildingPanels = GameObject.FindObjectsOfType<UIBuildingPanel>();
         UIBuildingButton[] uiBuildingButtons = GameObject.FindObjectsOfType<UIBuildingButton>();
@@ -73,9 +75,29 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void UpdateResourceStatus(ResourcesSuppliedAndDemanded resourcesSuppliedAndDemanded)
+    {
+        foreach (Text textbox in this.ResourceStatusTextboxes)
+        {
+            if (textbox.gameObject.name.Equals("CoalTextbox"))
+            {
+                textbox.text = "Coal: " + resourcesSuppliedAndDemanded.AvailableResourcesForTick[ResourceType.Coal].ToString();
+            }
+            else if (textbox.gameObject.name.Equals("OilTextbox"))
+            {
+                textbox.text = "Oil: " + resourcesSuppliedAndDemanded.AvailableResourcesForTick[ResourceType.Oil].ToString();
+            }
+            else if (textbox.gameObject.name.Equals("NuclearTextbox"))
+            {
+                textbox.text = "Nuclear: 0";
+            }
+        }
+    }
+
     public void TriggerTickUpdate(ResourcesSuppliedAndDemanded resourcesSuppliedAndDemanded)
     {
         UpdatePowerStatus(resourcesSuppliedAndDemanded);
         UpdateShieldStatus();
+        UpdateResourceStatus(resourcesSuppliedAndDemanded);
     }
 }

@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public void Initialize(int level, float secondsBeforeStormBeings)
+    {
+        this.Level = level;
+        this.SecondsBeforeStorm = secondsBeforeStormBeings;
+
+        InstantiateManagers();
+    }
+
     public int Level;
+    public float SecondsBeforeStorm = 10f;
 
     public GameObject MapPrefab;
     public Map Map;
@@ -13,23 +22,35 @@ public class LevelManager : MonoBehaviour
 
     public GameObject BuildingManagerPrefab;
     public BuildingManager BuildingManager;
+    private ShieldGeneratorScript ShieldGenerator;
 
     public CameraManager CameraManager;
 
     public GameObject UIManagerPrefab;
     public UIManager UIManager;
 
+    public GameObject StormPrefab;
+    public StormScript Storm;
+
     public MouseManager MouseManager;
 	// Use this for initialization
 	void Start ()
     {
-        InstantiateManagers();
-
+        Initialize(1, 10f);
     }
-	
+
+    bool levelFinished = false;
+
 	// Update is called once per frame
-	void Update () {
-		
+	void Update ()
+    {
+	    if(this.Storm.transform.position.y > 1f 
+            && this.ShieldGenerator.GetShieldPercent() <= 0f 
+            && levelFinished == false)
+        {
+            levelFinished = true;
+            this.TriggerEnd();
+        }
 	}
 
     void InstantiateManagers()
@@ -42,7 +63,7 @@ public class LevelManager : MonoBehaviour
         this.MouseManager.BuildingManager = this.BuildingManager;
 
         InstantiateAndInitialize_UI();
-        
+        StartStorm();
     }
 
     private void InstantiateAndInitialize_Map()
@@ -73,6 +94,8 @@ public class LevelManager : MonoBehaviour
         this.BuildingManager.gameObject.name = "Buildings";
 
         this.BuildingManager.Initialize(this);
+
+        this.ShieldGenerator = GameObject.FindObjectOfType<ShieldGeneratorScript>();
     }
 
     private void InstantiateAndInitialize_Camera()
@@ -90,5 +113,24 @@ public class LevelManager : MonoBehaviour
                 Vector3.zero,
                 Quaternion.identity
             ).GetComponent<UIManager>();
+    }
+
+    private void StartStorm()
+    {
+        this.Storm = Instantiate
+            (
+                StormPrefab,
+                Vector3.zero,
+                Quaternion.identity
+            ).GetComponent<StormScript>();
+
+        this.Storm.Initialize(this.Map, SecondsBeforeStorm);
+    }
+
+    private void TriggerEnd()
+    {
+        float duration = this.Storm.transform.position.y / 0.25f;
+        Debug.LogError("You survived for " + (duration - 10f).ToString() + " seconds.");
+        //GameObject.FindObjectOfType<GameManager>().EndLevel();
     }
 }
